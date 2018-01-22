@@ -1,11 +1,18 @@
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
+import { Provider as Redux } from 'react-redux'
+import { ConnectedRouter as Router } from 'react-router-redux'
 import App from './App'
+import store, { history } from './store'
 
 const root = document.getElementById('root')
 const load = () => render((
   <AppContainer>
-    <App />
+    <Redux store={store}>
+      <Router history={history}>
+        <App name='SmashPic' />
+      </Router>
+    </Redux>
   </AppContainer>
 ), root)
 

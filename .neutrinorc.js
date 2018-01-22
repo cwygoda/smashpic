@@ -21,6 +21,7 @@ module.exports = {
     ], [
       '@neutrinojs/react',
       {
+        publicPath: '/',
         html: {
           title: 'smashpic',
         },
