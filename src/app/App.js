@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom'
 import { number } from 'prop-types'
 import Welcome from '../components/pages/welcome'
+import NotFound from '../components/pages/notfound'
 
 const RunPage = ({ id }) => {
   return (
@@ -23,8 +24,6 @@ const Run = connect(
     id: props.match.params.id !== undefined ? parseInt(props.match.params.id) : null,
   })
 )(RunPage)
-
-const NotFound = () => <h1>What you were looking has run off trail and can not be found</h1>
 
 export default class App extends Component {
   render () {
