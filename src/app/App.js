@@ -1,18 +1,8 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom'
-import { number, string } from 'prop-types'
-import './App.css'
-
-const Welcome = ({ name }) =>
-  <Fragment>
-    <h1>Welcome to {name}</h1>
-    <Link to='/run'>Go run</Link>
-  </Fragment>
-
-Welcome.propTypes = {
-  name: string.isRequired,
-}
+import { number } from 'prop-types'
+import Welcome from '../components/pages/welcome'
 
 const RunPage = ({ id }) => {
   return (
@@ -37,16 +27,11 @@ const Run = connect(
 const NotFound = () => <h1>What you were looking has run off trail and can not be found</h1>
 
 export default class App extends Component {
-  static propTypes = {
-    name: string.isRequired,
-  }
-
   render () {
-    const { name } = this.props
     return (
       <div className='App'>
         <Switch>
-          <Route exact path='/' render={props => <Welcome name={name} {...props} />} />
+          <Route exact path='/' component={Welcome} />
           <Route path='/run/:id(\d+)?' component={Run} />
           <Route path='*' component={NotFound} />
         </Switch>

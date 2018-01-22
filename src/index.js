@@ -2,7 +2,7 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Provider as Redux } from 'react-redux'
 import { ConnectedRouter as Router } from 'react-router-redux'
-import App from './App'
+import App from './app'
 import store, { history } from './store'
 
 const root = document.getElementById('root')
@@ -18,7 +18,7 @@ const load = () => render((
 
 // This is needed for Hot Module Replacement
 if (module.hot) {
-  module.hot.accept('./App', load)
+  module.hot.accept('./app', load)
 }
 
 load()

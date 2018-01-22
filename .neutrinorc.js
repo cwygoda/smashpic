@@ -1,4 +1,7 @@
 module.exports = {
+  options: {
+    tests: 'src'
+  },
   use: [
     [
       '@neutrinojs/standardjs',
@@ -26,7 +29,11 @@ module.exports = {
           title: 'smashpic',
         },
       },
+    ], [
+      '@neutrinojs/jest',
+      {
+        setupTestFrameworkScriptFile: '<rootDir>/test-setup.js',
+      },
     ],
-    '@neutrinojs/jest',
   ],
 }
