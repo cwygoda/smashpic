@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import { routerMiddleware, routerReducer as router } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
+import thunk from 'redux-thunk'
 import { NAME as appName } from './app/constants'
 import appReducer from './app/reducer'
 import { NAME as smashrunName } from './api/smashrun/constants'
@@ -8,6 +9,7 @@ import smashrunReducer from './api/smashrun/reducer'
 
 const history = createHistory()
 const middleWares = [
+  thunk,
   routerMiddleware(history),
 ]
 

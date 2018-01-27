@@ -7,6 +7,9 @@ module.exports = {
       '@neutrinojs/standardjs',
       {
         eslint: {
+          globals: [
+            'mockStore',
+          ],
           plugins: ['import'],
           baseConfig: {
             extends: [

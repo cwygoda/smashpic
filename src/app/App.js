@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { Switch } from 'react-router-dom'
+import { func, string } from 'prop-types'
 import Welcome from '../components/pages/welcome'
 import NotFound from '../components/pages/notfound'
 import Run from '../components/pages/run'
@@ -7,6 +8,21 @@ import AuthSmashrun from '../components/pages/auth-smashrun'
 import Route from './route'
 
 export default class App extends Component {
+  static propTypes = {
+    fetchUserDetails: func.isRequired,
+    token: string,
+  }
+
+  componentDidMount () {
+    this.fetchUser(this.props.token)
+  }
+
+  componentWillReceiveProps (next) {
+    if (next.token !== this.props.token) {
+      this.fetchUser((next.token))
+    }
+  }
+
   render () {
     return (
       <div className='App'>
@@ -18,5 +34,12 @@ export default class App extends Component {
         </Switch>
       </div>
     )
+  }
+
+  fetchUser (token) {
+    const { fetchUserDetails } = this.props
+    if (token) {
+      fetchUserDetails()
+    }
   }
 }

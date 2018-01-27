@@ -12,6 +12,7 @@
     "test": "neutrino test"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "google-polyline": "^1.0.0",
     "moment": "^2.20.1",
     "projections": "^1.0.0",
@@ -24,16 +25,20 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
+    "redux-thunk": "^2.2.0",
     "store": "^2.0.12"
   },
   "devDependencies": {
     "@neutrinojs/jest": "^8.0.18",
     "@neutrinojs/react": "^8.0.18",
     "@neutrinojs/standardjs": "^8.0.18",
+    "deep-freeze": "^0.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-plugin-import": "^2.8.0",
+    "moxios": "^0.4.0",
     "neutrino": "^8.0.18",
+    "redux-mock-store": "^1.4.0",
     "timezone-mock": "^0.0.7"
   }
 }

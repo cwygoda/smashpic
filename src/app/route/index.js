@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { NAME } from '../constants'
+import { smashrunToken } from '../../api/smashrun/selectors'
 import Route from './Route'
 
 export default withRouter(connect(
   state => ({
-    token: state[NAME].smashrunToken,
+    token: smashrunToken(state),
   })
 )(Route))

@@ -1,6 +1,8 @@
+import RunList from '../../organisms/run-list'
+
 const Run = () => (
   <div>
-    Run List
+    <RunList />
   </div>
 )
 

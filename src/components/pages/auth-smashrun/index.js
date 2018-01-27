@@ -1,6 +1,7 @@
 import url from 'url'
 import { connect } from 'react-redux'
-import { setAuthReferer, setToken } from '../../../app/actions'
+import { setAuthReferer } from '../../../app/actions'
+import { setToken } from '../../../api/smashrun/actions'
 import { NAME } from '../../../app/constants'
 import Auth from './Auth'
 
