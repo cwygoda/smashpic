@@ -14,6 +14,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "google-polyline": "^1.0.0",
+    "material-ui": "^1.0.0-beta.30",
+    "material-ui-icons": "^1.0.0-beta.17",
     "moment": "^2.20.1",
     "projections": "^1.0.0",
     "prop-types": "^15.6.0",
@@ -26,7 +28,8 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-thunk": "^2.2.0",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
     "@neutrinojs/jest": "^8.0.18",

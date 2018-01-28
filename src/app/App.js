@@ -1,14 +1,32 @@
 import { Component } from 'react'
 import { Switch } from 'react-router-dom'
-import { func, string } from 'prop-types'
+import Reboot from 'material-ui/Reboot'
+import { withStyles } from 'material-ui/styles'
+import { func, shape, string } from 'prop-types'
 import Welcome from '../components/pages/welcome'
 import NotFound from '../components/pages/notfound'
 import Run from '../components/pages/run'
 import AuthSmashrun from '../components/pages/auth-smashrun'
 import Route from './route'
 
-export default class App extends Component {
+import 'typeface-roboto'
+
+const styles = {
+  '@global': {
+    'html, body, #root': {
+      height: '100%',
+    },
+  },
+  root: {
+    height: '100%',
+  },
+}
+
+class App extends Component {
   static propTypes = {
+    classes: shape({
+      root: string.isRequired,
+    }).isRequired,
     fetchUserDetails: func.isRequired,
     token: string,
   }
@@ -25,7 +43,8 @@ export default class App extends Component {
 
   render () {
     return (
-      <div className='App'>
+      <div className={this.props.classes.root}>
+        <Reboot />
         <Switch>
           <Route exact path='/' component={Welcome} />
           <Route path='/run/:id(\d+)?' private component={Run} />
@@ -43,3 +62,5 @@ export default class App extends Component {
     }
   }
 }
+
+export default withStyles(styles)(App)

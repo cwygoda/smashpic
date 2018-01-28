@@ -57,7 +57,7 @@ const svgString = (data, strokeWidth = 2, strokeColor = 'black', overSample = 1)
   return svg
 }
 
-const Track = ({ color, track, width }) => {
+const TrackSvg = ({ color, track, width }) => {
   const { points, viewBox } = dataPoints(track, width)
   const viewBoxWidth = viewBox[2] - viewBox[0] + width
   const viewBoxHeight = viewBox[3] - viewBox[1] + width
@@ -81,16 +81,16 @@ const Track = ({ color, track, width }) => {
   )
 }
 
-Track.propTypes = {
+TrackSvg.propTypes = {
   color: string.isRequired,
   track: string.isRequired,
   width: number.isRequired,
 }
 
-Track.defaultProps = {
+TrackSvg.defaultProps = {
   color: 'black',
   width: 2,
 }
 
 export { svgString }
-export default Track
+export default TrackSvg
