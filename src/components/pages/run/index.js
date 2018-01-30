@@ -8,6 +8,7 @@ import withWidth from 'material-ui/utils/withWidth'
 import { withStyles } from 'material-ui/styles'
 import { shape, string } from 'prop-types'
 import RunList from '../../organisms/run-list'
+import RunEdit from '../../organisms/run-edit'
 
 const styles = {
   run: {
@@ -41,13 +42,14 @@ const renderRun = (isSmall, id) => {
   }
   return (
     <Grid item xs={12} md={9}>
-      Run {id}
+      <RunEdit id={id} />
     </Grid>
   )
 }
 
-const Run = ({ width, match: { params: { id } }, classes }) => {
+const Run = ({ width, match: { params: { id: _id } }, classes }) => {
   const isSmall = width === 'xs' || width === 'sm'
+  const id = _id ? parseInt(_id, 10) : null
   const backLink = isSmall ? (id ? '/run' : '/') : '/'
   const { run: runClass, content: contentClass, list: listClass } = classes
   return (
@@ -55,7 +57,7 @@ const Run = ({ width, match: { params: { id } }, classes }) => {
       <AppBar position='static' className='runHeader'>
         <Toolbar>
           <Link to={backLink}>
-            <IconButton color='contrast'>
+            <IconButton color='secondary'>
               <ChevronLeft />
             </IconButton>
           </Link>

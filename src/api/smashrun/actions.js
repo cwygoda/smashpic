@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions'
 import { smashrunToken } from './selectors'
-import { FETCH_RUNS, FETCH_RUN_TRACK, FETCH_USER, NAME, SET_TOKEN } from './constants'
+import { FETCH_RUN, FETCH_RUNS, FETCH_RUN_TRACK, FETCH_USER, NAME, SET_TOKEN } from './constants'
 import * as client from './client'
 
 export const setToken = createAction(SET_TOKEN)
@@ -23,6 +23,32 @@ export const fetchRuns = (count = 3) => async (dispatch, getState) => {
       ) }))
   } catch (e) {
     dispatch(fetchRunsAction(e))
+  }
+}
+
+export const fetchRunAction = createAction(FETCH_RUN)
+
+export const fetchRun = (id) => async (dispatch, getState) => {
+  dispatch(fetchRunAction({ running: true }))
+
+  const token = smashrunToken(getState())
+
+  try {
+    const { data: run } = await client.fetchRun(token, id)
+
+    dispatch(fetchRunAction({
+      running: false,
+      run: {
+        id: run.activityId,
+        date: run.startDateTimeLocal,
+        distance: run.distance,
+        duration: run.duration,
+        lat: run.startLatitude,
+        lng: run.startLongitude,
+        city: run.city,
+      } }))
+  } catch (e) {
+    dispatch(fetchRunAction(e))
   }
 }
 

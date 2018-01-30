@@ -57,6 +57,51 @@ describe('SmashRun reducer', () => {
     })
   })
 
+  describe('FETCH_RUN handler', () => {
+    it('should store running fetch', () => {
+      const nextState = reducer(undefined, {
+        type: constants.FETCH_RUN,
+        payload: {
+          running: true,
+        },
+      })
+      const expected = {
+        ...initialState,
+        runStatus: true,
+      }
+      expect(nextState).toEqual(expected)
+    })
+
+    it('should store fetched run', () => {
+      const nextState = reducer(undefined, {
+        type: constants.FETCH_RUN,
+        payload: {
+          running: false,
+          run: { id: 1 },
+        },
+      })
+      const expected = {
+        ...initialState,
+        run: { id: 1 },
+      }
+      expect(nextState).toEqual(expected)
+    })
+
+    it('should store exception', () => {
+      const nextState = reducer(undefined, {
+        type: constants.FETCH_RUN,
+        payload: Error('Uh-Oh'),
+        error: true,
+      })
+      const expected = {
+        ...initialState,
+        run: null,
+        runStatus: Error('Uh-Oh'),
+      }
+      expect(nextState).toEqual(expected)
+    })
+  })
+
   describe('FETCH_RUN_TRACK handler', () => {
     it('should store fetched track', () => {
       const nextState = reducer(undefined, {

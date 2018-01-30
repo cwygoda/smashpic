@@ -83,6 +83,71 @@ describe('SmashRun API actions', () => {
     })
   })
 
+  describe('fetching run', () => {
+    it('should work', async () => {
+      const store = makeStore()
+      const run = {
+        activityId: 1,
+        startDateTimeLocal: '2018-01-25T08:54:00+01:00',
+        distance: 5,
+        duration: 300,
+        startLatitude: 0,
+        startLongitude: 0,
+        city: 'Atlantis',
+      }
+      const expected = [
+        {
+          type: constants.FETCH_RUN,
+          payload: { running: true },
+        },
+        {
+          type: constants.FETCH_RUN,
+          payload: {
+            running: false,
+            run: {
+              id: 1,
+              date: '2018-01-25T08:54:00+01:00',
+              distance: 5,
+              duration: 300,
+              lat: 0,
+              lng: 0,
+              city: 'Atlantis',
+            },
+          },
+        },
+      ]
+      moxios.stubRequest(/.*/, {
+        status: 200,
+        response: run,
+      })
+
+      await store.dispatch(actions.fetchRun(1))
+      expect(store.getActions()).toEqual(expected)
+    })
+
+    it('should handle exceptions', async () => {
+      const store = makeStore()
+      const exception = new Error('Request failed with status code 500')
+      const expected = [
+        {
+          type: constants.FETCH_RUN,
+          payload: { running: true },
+        },
+        {
+          type: constants.FETCH_RUN,
+          error: true,
+          payload: exception,
+        },
+      ]
+      moxios.stubRequest(/.*/, {
+        status: 500,
+      })
+
+      await store.dispatch(actions.fetchRun())
+      expect(store.getActions()).toEqual(expected)
+    })
+  })
+
   describe('fetching run track', () => {
     const polyline = 'iofwFvwqbM~DqKuEoHxPc`@tH{UmFoI`AsHtGh@|LtJvFtLnDxCo@qBhDCbBiEqCqP{AwBwC_@sCbNeBk@oCqBbC`HeElIaBy@cBdC_@vAm]x}@KP'
 

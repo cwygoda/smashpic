@@ -1,12 +1,14 @@
 import { handleActions } from 'redux-actions'
 import store from 'store'
-import { FETCH_RUNS, FETCH_RUN_TRACK, FETCH_USER, SET_TOKEN } from './constants'
+import { FETCH_RUN, FETCH_RUNS, FETCH_RUN_TRACK, FETCH_USER, SET_TOKEN } from './constants'
 
 const storage = store.namespace('smashpic')
 
 export const initialState = {
   runs: [],
   runsStatus: false,
+  run: null,
+  runStatus: false,
   smashrunToken: storage.get('smashrunToken', null),
   tracks: {},
   user: {
@@ -27,6 +29,19 @@ const handlers = {
       ...state,
       runs: [],
       runsStatus: error,
+    }),
+  },
+
+  [FETCH_RUN]: {
+    next: (state, { payload: { running, run = null } }) => ({
+      ...state,
+      run,
+      runStatus: running,
+    }),
+    throw: (state, { payload: error }) => ({
+      ...state,
+      run: null,
+      runStatus: error,
     }),
   },
 
