@@ -1,21 +1,11 @@
-import { number, oneOf } from 'prop-types'
+import { number } from 'prop-types'
+import { distanceUnit } from '../../../prop-types'
+import { formatDistance } from '../../../formatters'
 
-const ratios = {
-  'k': { label: 'km', ratio: 1.0 },
-  'm': { label: 'mi', ratio: 1.6 },
-}
-
-const round = (value, decimals) => Number(Math.round(value + 'e' + decimals) + 'e-' + decimals)
-
-const Distance = ({ value: val, unit }) => {
-  const { label, ratio } = ratios[unit]
-  const value = round(val / ratio, 1)
-
-  return `${value}${label}`
-}
+const Distance = ({ value, unit }) => formatDistance(value, unit)
 
 Distance.propTypes = {
-  unit: oneOf(Object.keys(ratios)),
+  unit: distanceUnit,
   value: number.isRequired,
 }
 

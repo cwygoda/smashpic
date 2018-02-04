@@ -1,13 +1,14 @@
 import Grid from 'material-ui/Grid'
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { arrayOf, bool, func, instanceOf, number, object, oneOf, oneOfType, shape, string } from 'prop-types'
+import { arrayOf, bool, func, instanceOf, number, object, oneOfType, shape, string } from 'prop-types'
+import { distanceUnit } from '../../../prop-types'
 import RunCard from '../run-card'
 
 // TODO: Test
 export default class RunList extends Component {
   static propTypes = {
-    distanceUnit: oneOf(['k', 'm']),
+    distanceUnit: distanceUnit,
 
     fetchRuns: func.isRequired,
     fetchRunTrack: func.isRequired,
