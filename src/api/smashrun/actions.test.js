@@ -94,6 +94,7 @@ describe('SmashRun API actions', () => {
         startLatitude: 0,
         startLongitude: 0,
         city: 'Atlantis',
+        country: 'Nowhereland',
       }
       const expected = [
         {
@@ -112,6 +113,7 @@ describe('SmashRun API actions', () => {
               lat: 0,
               lng: 0,
               city: 'Atlantis',
+              country: 'Nowhereland',
             },
           },
         },

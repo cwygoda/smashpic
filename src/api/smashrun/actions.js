@@ -46,6 +46,7 @@ export const fetchRun = (id) => async (dispatch, getState) => {
         lat: run.startLatitude,
         lng: run.startLongitude,
         city: run.city,
+        country: run.country,
       } }))
   } catch (e) {
     dispatch(fetchRunAction(e))
