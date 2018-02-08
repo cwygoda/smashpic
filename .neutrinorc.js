@@ -47,5 +47,9 @@ module.exports = {
         setupTestFrameworkScriptFile: '<rootDir>/test-setup.js',
       },
     ],
+    neutrino => {
+      const sourceMapSetting = process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-module-source-map'
+      neutrino.config.devtool(sourceMapSetting)
+    },
   ],
 }
