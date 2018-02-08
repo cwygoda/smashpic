@@ -98,11 +98,11 @@ class RunEdit extends Component {
             imageSrc={imageSrc}
           />
           {imageSrc === DEFAULT_IMAGE &&
-            <Button fab color='primary' className={classes.uploadButton}>
+            <Button variant='fab' color='primary' className={classes.uploadButton}>
               <FileUpload />
             </Button>}
         </Dropzone>
-        <Button raised onClick={this.download}>
+        <Button variant='raised' onClick={this.download}>
           <FileDownload className={classes.leftIcon} />
           Download
         </Button>
