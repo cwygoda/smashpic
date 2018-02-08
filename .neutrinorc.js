@@ -31,6 +31,11 @@ module.exports = {
         html: {
           title: 'smashpic',
         },
+        env: [
+          'CI_COMMIT',
+          'CI_TAG',
+          'SENTRY_DSN',
+        ],
       },
     ], [
       '@neutrinojs/jest',

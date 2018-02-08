@@ -1,3 +1,5 @@
+import './integrations/release'
+import './integrations/sentry'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Provider as Redux } from 'react-redux'
