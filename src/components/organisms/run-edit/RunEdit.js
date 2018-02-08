@@ -1,14 +1,14 @@
 import { Component, Fragment } from 'react'
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
+import FileDownload from 'material-ui-icons/FileDownload'
 import FileUpload from 'material-ui-icons/FileUpload'
 import Dropzone from 'react-dropzone'
+import moment from 'moment'
 import { bool, func, instanceOf, number, oneOfType, shape, string } from 'prop-types'
 import { distanceUnit } from '../../../prop-types'
 import Canvas from '../../atoms/canvas'
 import BeachRun from './beach-run.jpg'
-
-// https://github.com/cwygoda/smashpic/blob/rev0/src/components/templates/run-post/RunPost.js
 
 const DEFAULT_IMAGE = BeachRun
 
@@ -16,6 +16,9 @@ const styles = theme => ({
   dropzone: {
     position: 'relative',
     maxWidth: '952px',
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
   },
   uploadButton: {
     position: 'absolute',
@@ -29,6 +32,7 @@ class RunEdit extends Component {
   static propTypes = {
     classes: shape({
       dropzone: string.isRequired,
+      leftIcon: string.isRequired,
       uploadButton: string.isRequired,
     }).isRequired,
     distanceUnit: distanceUnit,
@@ -60,6 +64,7 @@ class RunEdit extends Component {
 
   constructor (props) {
     super(props)
+    this.download = this.download.bind(this)
     this.onDrop = this.onDrop.bind(this)
   }
 
@@ -97,6 +102,11 @@ class RunEdit extends Component {
               <FileUpload />
             </Button>}
         </Dropzone>
+        <Button raised onClick={this.download}>
+          <FileDownload className={classes.leftIcon} />
+          Download
+        </Button>
+        <a ref={a => { this.downloadLink = a }} />
       </Fragment>
     )
   }
@@ -119,6 +129,16 @@ class RunEdit extends Component {
     })
     // TODO: Reader error handling
     reader.readAsDataURL(accepted[0])
+  }
+
+  download () {
+    const datetime = moment(this.props.run.startDateTimeLocal).format('YY-MM-DD-HH-mm')
+    const filename = `smashpic-${datetime}.jpg`
+    this.downloadLink.href = this.canvas.getCanvas().toDataURL('image/jpeg', 0.85)
+    this.downloadLink.download = filename
+    this.downloadLink.click()
+    const DOMURL = window.URL || window.webkitURL || window
+    DOMURL.revokeObjectURL(this.downloadLink.href)
   }
 }
 
