@@ -30,6 +30,10 @@ module.exports = {
         publicPath: '/',
         html: {
           title: 'smashpic',
+          googleAnalytics: process.env.ANALYTICS_ID ? {
+            trackingId: process.env.ANALYTICS_ID,
+            pageViewOnLoad: true
+          } : null,
         },
         env: [
           'CI_COMMIT',

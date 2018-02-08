@@ -6,6 +6,9 @@ import { Provider as Redux } from 'react-redux'
 import { ConnectedRouter as Router } from 'react-router-redux'
 import App from './app'
 import store, { history } from './store'
+import analyticsListener from './integrations/analytics'
+
+history.listen(analyticsListener)
 
 const root = document.getElementById('root')
 const load = () => render((
