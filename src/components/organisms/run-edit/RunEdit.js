@@ -1,4 +1,8 @@
 import { Component, Fragment } from 'react'
+import { withStyles } from 'material-ui/styles'
+import Button from 'material-ui/Button'
+import FileUpload from 'material-ui-icons/FileUpload'
+import Dropzone from 'react-dropzone'
 import { bool, func, instanceOf, number, oneOfType, shape, string } from 'prop-types'
 import { distanceUnit } from '../../../prop-types'
 import Canvas from '../../atoms/canvas'
@@ -8,8 +12,25 @@ import BeachRun from './beach-run.jpg'
 
 const DEFAULT_IMAGE = BeachRun
 
-export default class RunEdit extends Component {
+const styles = theme => ({
+  dropzone: {
+    position: 'relative',
+    maxWidth: '952px',
+  },
+  uploadButton: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+})
+
+class RunEdit extends Component {
   static propTypes = {
+    classes: shape({
+      dropzone: string.isRequired,
+      uploadButton: string.isRequired,
+    }).isRequired,
     distanceUnit: distanceUnit,
     fetchRun: func.isRequired,
     fetchRunTrack: func.isRequired,
@@ -37,6 +58,11 @@ export default class RunEdit extends Component {
     image: null,
   }
 
+  constructor (props) {
+    super(props)
+    this.onDrop = this.onDrop.bind(this)
+  }
+
   componentDidMount () {
     this.fetchData(this.props.id)
   }
@@ -48,17 +74,29 @@ export default class RunEdit extends Component {
   }
 
   render () {
-    const { distanceUnit, run, track } = this.props
+    const { classes, distanceUnit, run, track } = this.props
     const imageSrc = this.state.image || DEFAULT_IMAGE
+
     return (
       <Fragment>
-        <Canvas
-          ref={c => { this.canvas = c }}
-          run={run}
-          track={track}
-          distanceUnit={distanceUnit}
-          imageSrc={imageSrc}
-        />
+        <Dropzone
+          accept='image/*'
+          className={classes.dropzone}
+          disablePreview
+          multiple={false}
+          onDrop={this.onDrop}>
+          <Canvas
+            ref={c => { this.canvas = c }}
+            run={run}
+            track={track}
+            distanceUnit={distanceUnit}
+            imageSrc={imageSrc}
+          />
+          {imageSrc === DEFAULT_IMAGE &&
+            <Button fab color='primary' className={classes.uploadButton}>
+              <FileUpload />
+            </Button>}
+        </Dropzone>
       </Fragment>
     )
   }
@@ -69,4 +107,19 @@ export default class RunEdit extends Component {
       this.props.fetchRunTrack(id)
     }
   }
+
+  onDrop (accepted) {
+    if (accepted.length !== 1) {
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = () => this.setState({
+      image: reader.result,
+    })
+    // TODO: Reader error handling
+    reader.readAsDataURL(accepted[0])
+  }
 }
+
+export default withStyles(styles)(RunEdit)
