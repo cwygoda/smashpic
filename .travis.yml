@@ -1,0 +1,31 @@
+# SmashPic Travis CI control file
+# Node version is read from .nvmrc
+---
+language: node_js
+cache:
+  yarn: true
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
+env:
+  global:
+    - CI_COMMIT=$TRAVIS_COMMIT
+    - CI_TAG=$TRAVIS_TAG
+    # Sentry DSN
+    - secure: XASO5TGDAfqW5QXRmglBC2LAi85P7LApfuW1l7duT/ODjsE0HXe5Vhm1wQd3xg5QDMFz0ssDInEwCuHKBnqD8tC9QkCQkUo5UQLYtbkP3YwpSaKaZSjbWYuzyCzL5pEC7bgPotjra65DBsbQjnDnnqkUOhFxUiLJB0MaoOlotF8gfPFAWbMPrINf43+PtWwA9dduV1+/zUH5rsxZQz35h5OKy/qXGyUUDjQog6IJUaavwKyKlHwHccSiZboFLzCgT8YuJakJgKHuCmVFvaUymYQ3fL3jHY/NxVoBfUGh3gsTkwx9lfK/N27JjFaHwca300UUgAkacu0o3pjrI1QwUE6fZD95EmHmMqWWAEfgp8Hjr4kLPj66U//NIyMmCzxtEF/tCJY1hGiIj1StQWYVjdoVIdOWq8r0j+miMG6UKkjPOoDMdAt2aSHS0y71F46OMftME3AdlXFJFjTNiZwNsSFkhYzkubYpfa9NiShAXHHmlBZ3kt2o0oHvnyaL7t4opS8SNBcZJtu9+6NELdaWzAEGEkg5VkOdMBz1NVLrMDqtjNyWZaHXiOfSeprB2s0hfbSObR+R1R+ZQcRH/L2L9IM203xpJ4YABBs93e0EHv+bJn2a5flIKe88kD04D8Q4VVM0+O9WDpHr+msacq4ORXCt11RRgm32l5OK4pGKEEY=
+    # Google Analytics
+    - secure: L1gPsOXKSbi4ckG3Tq/VFJhj6a8Ur5RNx2HNbomRB0kAyndRRYfRktzvjczr489/KWzMy4UhvS4uPErgld1pwr+9a/uyorFtBA1HUC5usMZN0KwSgAwgdZ6UtF6QGY66v4d8bEGdwv9gtCKzonNmPKqdzGb5a6jjmaDi9yA7qrZpTGOD/ViGbFQqbn/kCAe8zSLBegHlX618lnq5uRAyLof6faBwb75YZzbIfzMwbbPJwcNH9THO2hl+lpy6iFP4tOJkJeeT+aXmUxQHl1wdO6uaWUrM6r8PTPyTM70OLVfETW1s7alvexX5SE0D1VpsATXa5jCtuGUgDXT3CtuIorR/PTVHr5M0avR8g2Pywfhl08Q8WltNRmIhqVPtFtuDIM79DOY3JWS7aykGSh8G0sCIkSUYKQc9iupgpiRlk3dlZZ+XSPCqoopgKQaXptepOYaGCHTO9O2cHW1xSCjEf201e5hqFgYbRoiDz8O27A9NTuHERVlhJPxgqRpnpCVRBVxApXVIg2ymd1mEQh/vzaQufMBE6RNx4yO7GxDNP7x2UDM9n7rTX7zVhfSUmrXNvVef1un+8zi7TdbNi9MTx5ftkDhwFCxDkNDRgUD5UxKF8RVzJntr2oiQFuZkFefEPE8me6tv0NvdhYBkPNbXp/qh7t/GxuqZyVlTAQWbxJA=
+script:
+  - NODE_ENV=test npm test
+  - NODE_ENV=production npm run build
+deploy:
+  - provider: firebase
+    skip_cleanup: true
+    token:
+      secure:   "ZkLAnV4hzIMJcjBIrs+1ZDz4cWApJmM8CuL1N26hZGFkIMATV6ioiYJ98D1Q27srZUyw923uCjKUwIdAL0b33jyXQ13ui3U12oGOm9JJzPAH595okAxJL8wK85w+6oRthwzNxTwWztddjCIGunWx8sbXLyPwwnOIgcmrJRymcVVHL4R9Kf7DRQLc6Xm6elpgi0mcJ/QMqn09Gy+VVgH91EWHAReMXwehrlKKhM5aGc7Rn5ORPX+bOunKMe9XqKKb0zMtGWBnkdf5v/+Jl8YdaBxuKPQ3h8II61Y6E78v1M3SfgLqYLFSFBKeg+AbDlxvcwq3sGcokqC8KQ6drR0/s/SR5J9iUDmUz0dOs9QJFVO5ujchtSbRmMxprYpvXKz5IJPeZXA8OpyT+qtPe9rhHAPJWePGBIpekyzCWhXb89BO9jkZsqUCiK/wofvtTMC7iY2dTfZ5J5HBkA8h6OoxkIJ0EVz5GXDp2gL1WJX9Yi225Q6  my79Pb9yeC1DsRccAjj3iDtsIr1zFdYVo4sz/hCFGbMhh4ruO/wdK44pQ0ZrEOnw/acdJLGeYeBQBA3q8qHczU836WC/eVFvpwmDgJKLwuqZGW40MIM69tnGtFtQ7xaAZSYtj+PGqEHNQeo47KsqV3FN4nGcMqtS+euIzjcowMMEXPHDD8b+eTNSjb9w="
+    project: 'smashpic-canary'
+    message: $TRAVIS_COMMIT
+    on:
+      branch: master
