@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import { Component } from 'react'
 import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import FileDownload from 'material-ui-icons/FileDownload'
@@ -15,10 +15,13 @@ const DEFAULT_IMAGE = BeachRun
 const styles = theme => ({
   dropzone: {
     position: 'relative',
-    maxWidth: '952px',
+    maxWidth: '476px',
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
+  },
+  runEdit: {
+    height: '100%',
   },
   uploadButton: {
     position: 'absolute',
@@ -34,6 +37,7 @@ class RunEdit extends Component {
     classes: shape({
       dropzone: string.isRequired,
       leftIcon: string.isRequired,
+      runEdit: string.isRequired,
       uploadButton: string.isRequired,
     }).isRequired,
     country: string,
@@ -88,7 +92,7 @@ class RunEdit extends Component {
     const imageSrc = this.state.image || DEFAULT_IMAGE
 
     return (
-      <Fragment>
+      <div className={classes.runEdit}>
         <Dropzone
           accept='image/*'
           className={classes.dropzone}
@@ -114,7 +118,7 @@ class RunEdit extends Component {
           Download
         </Button>
         <a ref={a => { this.downloadLink = a }} />
-      </Fragment>
+      </div>
     )
   }
 

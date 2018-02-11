@@ -1,6 +1,7 @@
 import querystring from 'querystring'
 import { Component } from 'react'
 import { func, object, shape, string } from 'prop-types'
+import Button from 'material-ui/Button'
 
 // TODO: Test
 
@@ -49,9 +50,9 @@ export default class Auth extends Component {
     return (
       <div>
         {this.props.token &&
-          <div onClick={this.props.unauth}>Unauthenticate</div>}
+          <Button variant='raised' onClick={this.props.unauth}>Unauthenticate</Button>}
         {!this.props.token &&
-          <div onClick={this.props.auth}>Authenticate</div>}
+          <Button variant='raised' onClick={this.props.auth}>Authenticate</Button>}
       </div>
     )
   }
