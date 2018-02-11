@@ -3,6 +3,6 @@ import Welcome from './Welcome'
 
 export default connect(
   state => ({
-    firstName: null,
+    firstName: undefined,
   })
 )(Welcome)
