@@ -11,6 +11,8 @@ const CANVAS_SIZE = 476
 
 export default class Canvas extends Component {
   static propTypes = {
+    city: string,
+    country: string,
     distanceUnit: distanceUnit,
     imageSrc: string.isRequired,
     run: object,
@@ -109,8 +111,7 @@ export default class Canvas extends Component {
   }
 
   renderLocation () {
-    const { run } = this.props
-    const { city, country } = run || {}
+    const { city, country } = this.props
     if (!city || !country) {
       return
     }
@@ -130,8 +131,8 @@ export default class Canvas extends Component {
   }
 
   renderStats () {
-    const { run, distanceUnit } = this.props
-    const { city, country, distance, duration } = run || {}
+    const { city, country, distanceUnit, run } = this.props
+    const { distance, duration } = run || {}
 
     if (!distance || !duration) {
       return

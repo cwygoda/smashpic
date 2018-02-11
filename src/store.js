@@ -6,6 +6,8 @@ import { NAME as appName } from './app/constants'
 import appReducer from './app/reducer'
 import { NAME as smashrunName } from './api/smashrun/constants'
 import smashrunReducer from './api/smashrun/reducer'
+import { NAME as geonamesName } from './api/geonames/constants'
+import geonamesReducer from './api/geonames/reducer'
 
 const history = createHistory()
 const middleWares = [
@@ -18,6 +20,7 @@ const enhancers = enableReduxDevTools ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOS
 const reducer = combineReducers({
   [appName]: appReducer,
   [smashrunName]: smashrunReducer,
+  [geonamesName]: geonamesReducer,
   router,
 })
 const initialState = {}

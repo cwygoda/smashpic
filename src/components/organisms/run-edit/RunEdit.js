@@ -30,14 +30,17 @@ const styles = theme => ({
 
 class RunEdit extends Component {
   static propTypes = {
+    city: string,
     classes: shape({
       dropzone: string.isRequired,
       leftIcon: string.isRequired,
       uploadButton: string.isRequired,
     }).isRequired,
+    country: string,
     distanceUnit: distanceUnit,
     fetchRun: func.isRequired,
     fetchRunTrack: func.isRequired,
+    geocode: func.isRequired,
     id: number,
     run: shape({
       id: number.isRequired,
@@ -46,7 +49,6 @@ class RunEdit extends Component {
       duration: number.isRequired,
       lat: number.isRequired,
       lng: number.isRequired,
-      city: string,
     }),
     runStatus: oneOfType([
       bool,
@@ -76,10 +78,13 @@ class RunEdit extends Component {
     if (next.id !== this.props.id) {
       this.fetchData(next.id)
     }
+    if (next.run) {
+      this.props.geocode(next.run.lat, next.run.lng)
+    }
   }
 
   render () {
-    const { classes, distanceUnit, run, track } = this.props
+    const { city, classes, country, distanceUnit, run, track } = this.props
     const imageSrc = this.state.image || DEFAULT_IMAGE
 
     return (
@@ -96,6 +101,8 @@ class RunEdit extends Component {
             track={track}
             distanceUnit={distanceUnit}
             imageSrc={imageSrc}
+            city={city}
+            country={country}
           />
           {imageSrc === DEFAULT_IMAGE &&
             <Button variant='fab' color='primary' className={classes.uploadButton}>
