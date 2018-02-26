@@ -15,6 +15,7 @@ const styles = {
   '@global': {
     'html, body, #root': {
       height: '100%',
+      fontFamily: 'Roboto, sans-serif',
     },
   },
   root: {
