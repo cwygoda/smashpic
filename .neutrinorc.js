@@ -30,12 +30,15 @@ module.exports = {
         publicPath: '/',
         html: {
           title: 'smashpic',
-          googleAnalytics: process.env.ANALYTICS_ID ? {
-            trackingId: process.env.ANALYTICS_ID,
-            pageViewOnLoad: true
-          } : null,
+          scripts: [
+            {
+              src: 'https://www.google-analytics.com/analytics.js',
+              async: undefined,
+            }
+          ],
         },
         env: [
+          'ANALYTICS_ID',
           'CI_COMMIT',
           'CI_TAG',
           'SENTRY_DSN',
