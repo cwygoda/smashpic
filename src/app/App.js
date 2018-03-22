@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { Switch } from 'react-router-dom'
-import Reboot from 'material-ui/Reboot'
+import CssBaseline from 'material-ui/CssBaseline'
 import { withStyles } from 'material-ui/styles'
 import { func, shape, string } from 'prop-types'
 import Welcome from '../components/pages/welcome'
@@ -45,7 +45,7 @@ class App extends Component {
   render () {
     return (
       <div className={this.props.classes.root}>
-        <Reboot />
+        <CssBaseline />
         <Switch>
           <Route exact path='/' component={Welcome} />
           <Route path='/run/:id(\d+)?' private component={Run} />
