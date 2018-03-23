@@ -82,7 +82,7 @@ class Welcome extends Component {
         </p>
         <div className={classes.letsGo}>
           <Link to='/run'>
-            <Button size='large' variant='raised'>Let&rsquo;s go</Button>
+            <Button size='large' variant='raised' color='primary'>Let&rsquo;s go</Button>
           </Link>
         </div>
       </div>

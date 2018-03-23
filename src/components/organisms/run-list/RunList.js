@@ -2,12 +2,26 @@ import Grid from 'material-ui/Grid'
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { arrayOf, bool, func, instanceOf, number, object, oneOfType, shape, string } from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import { distanceUnit } from '../../../prop-types'
 import RunCard from '../run-card'
 
+const styles = theme => ({
+  runList: {
+    textAlign: 'center',
+    '& a': {
+      color: theme.palette.text.primary,
+      textDecoration: 'none',
+    },
+  },
+})
+
 // TODO: Test
-export default class RunList extends Component {
+class RunList extends Component {
   static propTypes = {
+    classes: shape({
+      runList: string.isRequired,
+    }).isRequired,
     distanceUnit: distanceUnit,
 
     fetchRuns: func.isRequired,
@@ -41,7 +55,7 @@ export default class RunList extends Component {
   }
 
   render () {
-    const { distanceUnit, runs, runsStatus, tracks } = this.props
+    const { classes, distanceUnit, runs, runsStatus, tracks } = this.props
     if (runsStatus === true) {
       return <div>Loading…</div>
     }
@@ -50,7 +64,7 @@ export default class RunList extends Component {
     }
 
     return (
-      <Grid container spacing={8}>
+      <Grid container spacing={8} className={classes.runList}>
         {runs.map(run =>
           <Grid key={run.id} item xs={12} sm={6} md={12}>
             <Link to={`/run/${run.id}`}>
@@ -68,3 +82,5 @@ export default class RunList extends Component {
     )
   }
 }
+
+export default withStyles(styles)(RunList)

@@ -11,17 +11,21 @@ import Route from './route'
 
 import 'typeface-roboto'
 
-const styles = {
+const styles = theme => ({
   '@global': {
     'html, body, #root': {
       height: '100%',
       fontFamily: 'Roboto, sans-serif',
     },
+    html: {
+      background: theme.palette.background.default,
+      color: theme.palette.text.primary,
+    },
   },
   root: {
     height: '100%',
   },
-}
+})
 
 class App extends Component {
   static propTypes = {

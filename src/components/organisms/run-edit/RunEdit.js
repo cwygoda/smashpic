@@ -13,15 +13,25 @@ import BeachRun from './beach-run.jpg'
 const DEFAULT_IMAGE = BeachRun
 
 const styles = theme => ({
+  canvas: {
+    border: `${theme.spacing.unit}px solid ${theme.palette.secondary.main}`,
+    margin: theme.spacing.unit,
+    '& canvas': {
+      display: 'block',
+    },
+  },
   dropzone: {
     position: 'relative',
     maxWidth: '476px',
+    margin: 'auto',
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
   },
   runEdit: {
     height: '100%',
+    textAlign: 'center',
+    padding: theme.spacing.unit,
   },
   uploadButton: {
     position: 'absolute',
@@ -35,6 +45,7 @@ class RunEdit extends Component {
   static propTypes = {
     city: string,
     classes: shape({
+      canvas: string.isRequired,
       dropzone: string.isRequired,
       leftIcon: string.isRequired,
       runEdit: string.isRequired,
@@ -99,21 +110,23 @@ class RunEdit extends Component {
           disablePreview
           multiple={false}
           onDrop={this.onDrop}>
-          <Canvas
-            ref={c => { this.canvas = c }}
-            run={run}
-            track={track}
-            distanceUnit={distanceUnit}
-            imageSrc={imageSrc}
-            city={city}
-            country={country}
-          />
+          <div className={classes.canvas}>
+            <Canvas
+              ref={c => { this.canvas = c }}
+              run={run}
+              track={track}
+              distanceUnit={distanceUnit}
+              imageSrc={imageSrc}
+              city={city}
+              country={country}
+            />
+          </div>
           {imageSrc === DEFAULT_IMAGE &&
-            <Button variant='fab' color='primary' className={classes.uploadButton}>
+            <Button variant='fab' color='secondary' className={classes.uploadButton}>
               <FileUpload />
             </Button>}
         </Dropzone>
-        <Button variant='raised' onClick={this.download}>
+        <Button variant='raised' color='primary' onClick={this.download}>
           <FileDownload className={classes.leftIcon} />
           Download
         </Button>
