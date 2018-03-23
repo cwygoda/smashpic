@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { setAuthReferer } from '../../../app/actions'
 import { setToken } from '../../../api/smashrun/actions'
 import { NAME } from '../../../app/constants'
+import { smashrunToken } from '../../../api/smashrun/selectors'
 import Auth from './Auth'
 
 export default connect(
   (state, props) => ({
-    token: state[NAME].token,
+    token: smashrunToken(state),
     authReferer: state[NAME].authReferer,
 
     auth: () => {
