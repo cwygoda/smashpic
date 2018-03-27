@@ -38,6 +38,10 @@ const styles = theme => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+
+    '&.faded': {
+      opacity: 0.25,
+    },
   },
 })
 
@@ -101,6 +105,7 @@ class RunEdit extends Component {
   render () {
     const { city, classes, country, distanceUnit, run, track } = this.props
     const imageSrc = this.state.image || DEFAULT_IMAGE
+    const uploadButtonClasses = [classes.uploadButton, imageSrc === DEFAULT_IMAGE ? false : 'faded'].filter(c => c).join(' ')
 
     return (
       <div className={classes.runEdit}>
@@ -121,10 +126,9 @@ class RunEdit extends Component {
               country={country}
             />
           </div>
-          {imageSrc === DEFAULT_IMAGE &&
-            <Button variant='fab' color='secondary' className={classes.uploadButton}>
-              <FileUpload />
-            </Button>}
+          <Button variant='fab' color='secondary' className={uploadButtonClasses}>
+            <FileUpload />
+          </Button>
         </Dropzone>
         <Button variant='raised' color='primary' onClick={this.download}>
           <FileDownload className={classes.leftIcon} />
