@@ -8,14 +8,22 @@ import { Link } from 'react-router-dom'
 import { node, shape, string } from 'prop-types'
 
 const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+  },
   content: {
-    flex: 1,
+    flexGrow: 1,
+    overflow: 'hidden',
+    height: '100%',
   },
 }
 
-const appPage = ({ backLink, classes, className, content }) => {
+const appPage = ({ backLink, classes, className, children }) => {
+  const classNames = [classes.container, className].filter(c => c).join(' ')
   return (
-    <div className={className}>
+    <div className={classNames}>
       <AppBar position='static'>
         <Toolbar>
           <Link to={backLink}>
@@ -26,7 +34,7 @@ const appPage = ({ backLink, classes, className, content }) => {
         </Toolbar>
       </AppBar>
       <Grid container spacing={0} className={classes.content}>
-        {content}
+        {children}
       </Grid>
     </div>
   )
@@ -35,10 +43,11 @@ const appPage = ({ backLink, classes, className, content }) => {
 appPage.propTypes = {
   backLink: string.isRequired,
   classes: shape({
+    container: string.isRequired,
     content: string.isRequired,
   }).isRequired,
   className: string,
-  content: node.isRequired,
+  children: node.isRequired,
 }
 
 appPage.defaultProps = {

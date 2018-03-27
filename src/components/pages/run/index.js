@@ -7,14 +7,16 @@ import RunList from '../../organisms/run-list'
 import RunEdit from '../../organisms/run-edit'
 
 const styles = {
-  run: {
-    height: '100%',
+  container: {
+    flex: 1,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    height: '100%', // required for Firefox somehow
   },
   list: {
     overflowX: 'hidden',
     overflowY: 'auto',
+    height: '100%',
   },
 }
 
@@ -45,22 +47,21 @@ const Run = ({ width, match: { params: { id: _id } }, classes }) => {
   const id = _id ? parseInt(_id, 10) : null
   const backLink = isSmall ? (id ? '/run' : '/') : '/'
   const { run: runClass, list: listClass } = classes
+
   return (
-    <AppPage
-      backLink={backLink}
-      className={runClass}
-      content={[
-        renderList(isSmall, id, listClass),
-        renderRun(isSmall, id),
-      ]}
-    />
+    <AppPage backLink={backLink} className={runClass}>
+      <div className={classes.container}>
+        {renderList(isSmall, id, listClass)}
+        {renderRun(isSmall, id)}
+      </div>
+    </AppPage>
   )
 }
 
 Run.propTypes = {
   classes: shape({
+    container: string.isRequired,
     list: string.isRequired,
-    run: string.isRequired,
   }).isRequired,
   match: shape({
     params: shape({
