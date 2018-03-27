@@ -36,6 +36,15 @@ class Welcome extends Component {
     textWidth: null,
   }
 
+  componentWillReceiveProps (next) {
+    const { firstName } = this.props
+    if (next.firstName !== firstName) {
+      this.setState({
+        textWidth: null,
+      })
+    }
+  }
+
   render () {
     const { classes, firstName } = this.props
     const { textWidth } = this.state
