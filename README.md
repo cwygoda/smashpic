@@ -25,4 +25,4 @@ To create a new version, use the `npm version major|minor|patch` command.
 
 ## Analytics
 
-…is done using Google Analytics: [Canary](https://analytics.google.com/analytics/web/#embed/report-home/a112185776w167229727p167499675/), [Live](https://analytics.google.com/analytics/web/#embed/report-home/a112185776w167237635p167506675/).
+…is done using Google Analytics: [Canary](https://analytics.google.com/analytics/web/#/embed/report-home/a112185776w172987022p172422989/), [Live](https://analytics.google.com/analytics/web/#embed/report-home/a112185776w167237635p167506675/).

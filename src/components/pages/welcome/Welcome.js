@@ -29,6 +29,23 @@ const styles = theme => ({
       textDecoration: 'none',
     },
   },
+  footer: {
+    position: 'fixed',
+    bottom: 0,
+    listStyleType: 'none',
+    padding: 0,
+
+    '& li': {
+      display: 'inline-block',
+    },
+
+    '& a': {
+      display: 'inline-block',
+      padding: '0.5em',
+      textDecoration: 'none',
+      color: 'grey',
+    },
+  },
 })
 
 class Welcome extends Component {
@@ -94,6 +111,9 @@ class Welcome extends Component {
             <Button size='large' variant='raised' color='primary'>Let&rsquo;s go</Button>
           </Link>
         </div>
+        <ul className={classes.footer}>
+          <li><Link to='/privacy'>Privacy</Link></li>
+        </ul>
       </div>
     )
   }
@@ -101,6 +121,7 @@ class Welcome extends Component {
 
 Welcome.propTypes = {
   classes: shape({
+    footer: string.isRequired,
     headline: string.isRequired,
     hero: string.isRequired,
     letsGo: string.isRequired,

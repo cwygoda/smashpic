@@ -7,6 +7,7 @@ import Welcome from '../components/pages/welcome'
 import NotFound from '../components/pages/notfound'
 import Run from '../components/pages/run'
 import AuthSmashrun from '../components/pages/auth-smashrun'
+import Privacy from '../components/pages/privacy'
 import Route from './route'
 
 import 'typeface-roboto'
@@ -54,6 +55,7 @@ class App extends Component {
           <Route exact path='/' component={Welcome} />
           <Route path='/run/:id(\d+)?' private component={Run} />
           <Route path='/auth/smashrun' component={AuthSmashrun} />
+          <Route path='/privacy' component={Privacy} />
           <Route path='*' component={NotFound} />
         </Switch>
       </div>
