@@ -1,3 +1,4 @@
+import Typography from 'material-ui/Typography'
 import AppBar from 'material-ui/AppBar'
 import Grid from 'material-ui/Grid'
 import Toolbar from 'material-ui/Toolbar'
@@ -20,8 +21,9 @@ const styles = {
   },
 }
 
-const appPage = ({ backLink, classes, className, children }) => {
+const appPage = ({ backLink, classes, className, children, title }) => {
   const classNames = [classes.container, className].filter(c => c).join(' ')
+  const _title = title ? <Typography variant='title'>{title}</Typography> : null
   return (
     <div className={classNames}>
       <AppBar position='static'>
@@ -31,6 +33,7 @@ const appPage = ({ backLink, classes, className, children }) => {
               <ChevronLeft />
             </IconButton>
           </Link>
+          {_title}
         </Toolbar>
       </AppBar>
       <Grid container spacing={0} className={classes.content}>
@@ -48,6 +51,7 @@ appPage.propTypes = {
   }).isRequired,
   className: string,
   children: node.isRequired,
+  title: string,
 }
 
 appPage.defaultProps = {
