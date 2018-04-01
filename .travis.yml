@@ -2,25 +2,35 @@
 # Node version is read from .nvmrc
 ---
 language: node_js
+
 cache:
   yarn: true
   directories:
     - node_modules
-branches:
-  only:
-    - master
+
 env:
   global:
     - CI_COMMIT=$TRAVIS_COMMIT
     - CI_TAG=$TRAVIS_TAG
-    # Sentry DSN
-    - secure: XASO5TGDAfqW5QXRmglBC2LAi85P7LApfuW1l7duT/ODjsE0HXe5Vhm1wQd3xg5QDMFz0ssDInEwCuHKBnqD8tC9QkCQkUo5UQLYtbkP3YwpSaKaZSjbWYuzyCzL5pEC7bgPotjra65DBsbQjnDnnqkUOhFxUiLJB0MaoOlotF8gfPFAWbMPrINf43+PtWwA9dduV1+/zUH5rsxZQz35h5OKy/qXGyUUDjQog6IJUaavwKyKlHwHccSiZboFLzCgT8YuJakJgKHuCmVFvaUymYQ3fL3jHY/NxVoBfUGh3gsTkwx9lfK/N27JjFaHwca300UUgAkacu0o3pjrI1QwUE6fZD95EmHmMqWWAEfgp8Hjr4kLPj66U//NIyMmCzxtEF/tCJY1hGiIj1StQWYVjdoVIdOWq8r0j+miMG6UKkjPOoDMdAt2aSHS0y71F46OMftME3AdlXFJFjTNiZwNsSFkhYzkubYpfa9NiShAXHHmlBZ3kt2o0oHvnyaL7t4opS8SNBcZJtu9+6NELdaWzAEGEkg5VkOdMBz1NVLrMDqtjNyWZaHXiOfSeprB2s0hfbSObR+R1R+ZQcRH/L2L9IM203xpJ4YABBs93e0EHv+bJn2a5flIKe88kD04D8Q4VVM0+O9WDpHr+msacq4ORXCt11RRgm32l5OK4pGKEEY=
-    # Google Analytics
-    - secure: s1STqK/rN3b9Dcryi9qmIkqhVYlGSZ94UkwMRJnC8frpUppAPweVe5ZsOhEYhJ8a485RWQWs4DRbL3uqNpaSeGQZrpveUuu3vqvQ12w7qab9ltYZeZFeRDNMzIbPEdAUzSWifBe4jBig1wzFpgPeVGu3su5BNyBe8m6NSEeAI/Kr21aq1XANdlUnET0dPD9B9Tg5AF+GuJ8nNSRiHKTR9s+2gO+fGFV8yNC0mTxaytb+tw7RlTyFrq7aMIFzvVXtxc8iQrvHNmqkGZqCnRzl2yVitj4ba0kabKHlcRD10CqhzQTB+kzMUoGYeCmK83hYAqmF8NIRgeN6o9QXplLQViuuuBzuGbHyN45+e2VlvnBlbNdchEg9mTlQVeYWtJhNcxGqvOs7x9uKtY93268c06GAe5Ad7A6peAic2ml0WZH0tGpG0GbUE57Ry1cT7uG+YmnzyhI5mI2o+BpBPsTSZ8tJo5UQWECExMCCfMf6xyX3/XS1Pay2rm18Bhkvuil9NkpMKTqKEB2lxuArNXzTFQfhBuNAXkxHULHGHOLcjqcme3Gt3rzpyoVtW21mdOuNjzVNuMvsAw7BBGF37jtjNMvRFTz81xvT+Yvo84vSyXWlXkuzorNtJQnrYkj+sfalSrI0ZZhEQIRslhfFak05Dko2lvOELWszTU2u+hjXf7Q=
+    # CANARY_SENTRY_DSN
+    - secure: ViFZt1qoD4MECpOUxYrxqW20FvtkDUgZZ1HG157brV6Q+MYrMYmuy614QNOKF7I6c4a97qDwQm9OVgvWaWM1mrgsLb9UpZhjfpnxceR7GCOGYhLIyLttp4E07dyCl2qDmZqO9XZlNa7eV9OH4iGgW+wyUqM5g/9kI5q0l+Al/Lcl2+GA1YvnZfxkTR6hjmUeHmBWZG6M/0aZyDO2k4GUzcZH7KUHEviUqEY8lPSS1+dA1/VZoij9VEPu+5IJF30D2ZJZNFqek96MD76kbzcpz8O2ynEPmi+Z8OScIYlWiNiUDfAwhgC0DdyGdDBcHFLYzsXYgHpNx0XA6x+lKaC/Sp5KBlqHD3zCw9YGmRGVXQogmLkbzIL7ZHb2uFi0diseC2IKFNTCj3WSgkPp1K18dx5ZC4zoD8cuinTpcwBXzmSnI1lu0oGkhxUsC6b1gE0QH9ult0TOnmsRahIlKPE+Cjb2YhcBrcfZXZ9kj7fjSv/m5JkWXZivFq2NheZcuUjc/CczX71Z3N8nYWuFO/lJcwLegTHwPKj0Lk1xrISb5iCTj224886hfMYG63rdtURghq/+5PAVxos2IO2+PLXMSpmTsW3uMWz8AM1+QaX/u0UzeGk/3ce1ezJ4QvU6vcOsmDMFxrAMUlr9do81ry12POpKYxcR4qcLGIzUSHtYwco=
+    # CANARY_ANALYTICS_ID
+    - secure: zh6Iw0uY/7SR+gSvM9+vcqC3jjZ9a0hq3xlAKxM7E+ML/u5TLi/wTWUvmtOm1+AWu5KCAZA+szC+XSxaC53eH69c3RstnePY6j6iXp/q9gMgBkFYVFNvY+F3MqRXP3jGIWaeuIboA1FaJALI+4Kwvt0xFYt1ioSnY7NrFzRcjp6dQYd/HnbkSxoFBXLpNCPAoD7aDCLDEvd5EPR/+us4UlwVYSozV/1tZTrJc7GdyJtfTWuCGW/uFQ8NjznEOP1FcB8JALJAYu1RuzJRX3m68TpbxhiPEQ447UKJKbpuDcYUpgoCNYLw3HvBp/joyaIUuU8iq3TBrfYBCVlYHnkOABpocigInDvbboHXnPb3G3Do2IQAdAKoSGj2hIuWFSm77aBg0YwhaPBoARCzZV5BLeoSd9bL+IP2lvgU83RdBxEg6u6NbLYLsjI4rcTkei1c134azY7UtZs9HlVGDs+8+L+McVA3K/CuUaUWe7OO96uvP7z6qjOr67Y7GXCbnbhQD0eDSy2nFh3iwZj2jKWoIvQ4ieTFofVZl8LR56HeZ755oVrYNJuQkGbSkLlGthyo/xe+uB1v72QiVeW5Y9YtQk20H4IDosJ0nY3pz6EqkoievpCwWndoZxzoKyHKyWkt5INr8wpjQ8PhGI7i42FnHUg1ua88yJF6aFumf86UZDM=
+    # LIVE_SENTRY_DSN
+    - secure: pyAvHBh8sGTRjuaLeP0X9i37vEVVB8WCgDqJ4rU2zOFc+DdEc18hGEUibOTx0+HRWp0bst2LGg6cbOowIv6iuxdF91ReZCiWJN3/9zxye6M4viv0YEHBsP4M6uOeGBMz7BSjoe3/2EieooV5PsBdCJVPkytOy+oo9O0DXOeIhJAI8RhE4blJjkw+WGEngDsRxXnEc4Q23P/YaP+Qeqciwvmp7l+YINgCcvAuyAqvbtblrlrGEPvt9JAoSC+FYLNDU61oMeyO2asoY7TK9w6DD8TYsMOjQ4yRAMtsIJlkv4W2DCrg/A1cPhblpPYJk7g66IpR/ehlsNwj6JY824W3G2fq6Rv/h6ltXS7UzI3sudDTSIOfhRQ5sm2/h8602/Knk1XxXXjHTHoIpfB6OMnbhb7QY3ZCr8L89mVFpRdLobTVc2bLq78Huk2/tTOJxJkKkZFpCv80BWiEOvUKVKCnzwvoExiYpRUYMZBPgjGvQrHjuZz9w4zzppSyK4avhn9fjztySS8goEZuxl9KvCEiDdykdr/ba9UFqVPZomcgV/nT2BzqfxZ6MOSuHUIQIWdAKQHkg+S2SosryOTW96pE86lmNezoDVs6mEYlUSvWTWvBW05Rz/Q4UvvlWQvmrhV2pIrOzEPEpqXLbeJVSgqeC8OrCZHrd8DJMLldc3UFWbk=
+    # LIVE_ANALYTICS_ID
+    - secure: h5VveIOz/cg9FeU0PtoxtpdsXtBIJlJMqlEGrBAZyNfko5MhVHiKQ+Vdw7Kv0a34njK5Q9qzsDZTgeV18nOj0fLsXZcZfVZiBEy7zuolDNpLPv/OyeK8JpOOZDA8p9bwT/to3bz0/glFDvOTaVQdclSDub7Jk6l1o2foFOnWMoDt5AdFCL+PYXkoEZ566CsaUYdTqodCCavf1xucDGWY9Cv/vxXP6zI6t83CP9RY9htdOt0V8j5t7vA5Ok5OyHNoQ/LJBnzexljf636fLq6frpxIaRnGcCdhwuohXDEdfSbyJVBkDX34RnHodLe5Bfof7vxh9sEBaXrSR0UGofFJ7nSCQ0HTuu3Scegtljx8idUAIfdFMdN2TShvl/8dfhcjg6ua8I/LZniQSQuhFu+p21448uefFoC66y9CMW/TMbaf198Puin6c/vFpwBRPVS83/zsreaut4COKmVdPVtPC2E/DELr5+IwQD5u68pzeUjmgakb9xnYrH7ydtmICl9q2vVwW6gVgtVa5JXk4vvOYniPvx33fz5OAxDzl1dcRdx58J1moX9xiu6fPkp6vxHVJVTYxllvQusuOmqaQyPl6yEeKZ3zznJ/ZzYsgxIJzooEoqR2KFNb8bPeaMzMWjmF0F/8RvHYVudPOyHldIMN7+h4sH5JgyIZQ2Gjr5/Dgn4=
+
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/  # Tags are branches for Travis
+
 script:
   - npm run lint
   - NODE_ENV=test npm test
   - NODE_ENV=production npm run build
+
 deploy:
   - provider: firebase
     skip_cleanup: true
@@ -30,3 +40,11 @@ deploy:
     message: $TRAVIS_COMMIT
     on:
       branch: master
+  - provider: firebase
+    skip_cleanup: true
+    token:
+      secure:   "ZkLAnV4hzIMJcjBIrs+1ZDz4cWApJmM8CuL1N26hZGFkIMATV6ioiYJ98D1Q27srZUyw923uCjKUwIdAL0b33jyXQ13ui3U12oGOm9JJzPAH595okAxJL8wK85w+6oRthwzNxTwWztddjCIGunWx8sbXLyPwwnOIgcmrJRymcVVHL4R9Kf7DRQLc6Xm6elpgi0mcJ/QMqn09Gy+VVgH91EWHAReMXwehrlKKhM5aGc7Rn5ORPX+bOunKMe9XqKKb0zMtGWBnkdf5v/+Jl8YdaBxuKPQ3h8II61Y6E78v1M3SfgLqYLFSFBKeg+AbDlxvcwq3sGcokqC8KQ6drR0/s/SR5J9iUDmUz0dOs9QJFVO5ujchtSbRmMxprYpvXKz5IJPeZXA8OpyT+qtPe9rhHAPJWePGBIpekyzCWhXb89BO9jkZsqUCiK/wofvtTMC7iY2dTfZ5J5HBkA8h6OoxkIJ0EVz5GXDp2gL1WJX9Yi225Q6  my79Pb9yeC1DsRccAjj3iDtsIr1zFdYVo4sz/hCFGbMhh4ruO/wdK44pQ0ZrEOnw/acdJLGeYeBQBA3q8qHczU836WC/eVFvpwmDgJKLwuqZGW40MIM69tnGtFtQ7xaAZSYtj+PGqEHNQeo47KsqV3FN4nGcMqtS+euIzjcowMMEXPHDD8b+eTNSjb9w="
+    project: 'smashpic-live'
+    message: $TRAVIS_TAG
+    on:
+      tags: true

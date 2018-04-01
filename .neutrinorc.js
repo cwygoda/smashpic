@@ -1,3 +1,11 @@
+if (process.env.CI_TAG) {
+  process.env.ANALYTICS_ID = process.env.LIVE_ANALYTICS_ID
+  process.env.SENTRY_DSN = process.env.LIVE_SENTRY_DSN
+} else {
+  process.env.ANALYTICS_ID = process.env.CANARY_ANALYTICS_ID
+  process.env.SENTRY_DSN = process.env.CANARY_SENTRY_DSN
+}
+
 module.exports = {
   options: {
     tests: 'src'
