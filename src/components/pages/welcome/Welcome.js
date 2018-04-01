@@ -112,6 +112,7 @@ class Welcome extends Component {
           </Link>
         </div>
         <ul className={classes.footer}>
+          <li><Link to='/about'>About</Link></li>
           <li><Link to='/privacy'>Privacy</Link></li>
         </ul>
       </div>
