@@ -2,13 +2,26 @@ import querystring from 'querystring'
 import { Component } from 'react'
 import { func, object, shape, string } from 'prop-types'
 import Button from 'material-ui/Button'
+import { withStyles } from 'material-ui/styles'
+import AppPage from '../../templates/app-page'
 
 // TODO: Test
 
-export default class Auth extends Component {
+const styles = theme => ({
+  content: {
+    padding: theme.spacing.unit,
+    maxWidth: '960px',
+    margin: '0 auto',
+  },
+})
+
+class Auth extends Component {
   static propTypes = {
     auth: func.isRequired,
     authReferer: string,
+    classes: shape({
+      content: string.isRequired,
+    }).isRequired,
     history: object.isRequired,
     location: shape({
       state: shape({
@@ -47,13 +60,34 @@ export default class Auth extends Component {
   }
 
   render () {
+    const { classes, token } = this.props
+    return (
+      <AppPage title='Smashrun Authentication'>
+        <div className={classes.content}>
+          {token && this.renderUnauth()}
+          {!token && this.renderAuth()}
+        </div>
+      </AppPage>
+    )
+  }
+
+  renderAuth () {
     return (
       <div>
-        {this.props.token &&
-          <Button variant='raised' onClick={this.props.unauth}>Unauthenticate</Button>}
-        {!this.props.token &&
-          <Button variant='raised' onClick={this.props.auth}>Authenticate</Button>}
+        <p>You need to authenticate at Smashrun to use Smashpic:</p>
+        <Button variant='raised' color='primary' onClick={this.props.auth}>Authenticate</Button>
+      </div>
+    )
+  }
+
+  renderUnauth () {
+    return (
+      <div>
+        <p>You are already authenticated at Smashrun. If you want Smashpic to forget your authentication, click below.</p>
+        <Button variant='raised' color='primary' onClick={this.props.unauth}>Unauthenticate</Button>
       </div>
     )
   }
 }
+
+export default withStyles(styles)(Auth)
