@@ -26,6 +26,18 @@ branches:
     - master
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/  # Tags are branches for Travis
 
+before_install:
+  - |
+      if [[ -z "$TRAVIS_TAG" ]]; then
+        for prefixed_envvar in ${!LIVE_*}; do
+          eval export ${prefixed_envvar#LIVE_}="${!prefixed_envvar}"
+        done
+      elif [[ "$TRAVIS_BRANCH" = "master" ]]; then
+        for prefixed_envvar in ${!LIVE_*}; do
+          eval export ${prefixed_envvar#LIVE_}="${!prefixed_envvar}"
+        done
+      fi
+
 script:
   - npm run lint
   - NODE_ENV=test npm test
