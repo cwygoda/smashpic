@@ -7,10 +7,7 @@ import { ConnectedRouter as Router } from 'react-router-redux'
 import { MuiThemeProvider } from 'material-ui/styles'
 import App from './app'
 import store, { history } from './store'
-import analyticsListener from './integrations/analytics'
 import theme from './theme'
-
-history.listen(analyticsListener)
 
 const root = document.getElementById('root')
 const load = () => render((
